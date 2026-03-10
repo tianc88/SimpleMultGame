@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BATTLESHIP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>BATTLESHIP</h1>
+</header>
+
+<div id="status-bar">
+  <div class="player-indicator" id="p1-indicator">
+    <div class="player-dot"></div>
+    <span>PLAYER 1</span>
+  </div>
+  <div id="phase-label">FLEET DEPLOYMENT</div>
+  <div class="player-indicator" id="p2-indicator">
+    <div class="player-dot"></div>
+    <span>PLAYER 2</span>
+  </div>
+</div>
+
+<div id="message-box">Select a ship and place it on your grid.</div>
+
+<div id="main">
+
+  <!-- Create the grid for player 1 -->
+  <div class="board-section" id="p1-section">
+    <div class="board-label" id="p1-label">YOUR FLEET</div>
+    <div class="grid-wrapper">
+      <div class="axis-labels">
+        <div class="corner"></div>
+        <div class="col-labels" id="p1-col-labels"></div>
+      </div>
+      <div style="display:flex">
+        <div class="row-labels" id="p1-row-labels"></div>
+        <div class="grid" id="p1-grid"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Have the panel that contains the type of ships and other actions -->
+  <div id="side-panel">
+    <div class="panel-box">
+      <h3>Fleet</h3>
+      <div class="ship-list" id="ship-list"></div>
+    </div>
+    <button id="orient-btn" class="horizontal" onclick="toggleOrientation()">⟷ HORIZONTAL</button>
+    <button class="action-btn primary" id="ready-btn" onclick="readyUp()" style="display:none">READY TO BATTLE →</button>
+    <button class="action-btn danger" id="reset-btn" onclick="resetPlacement()" style="display:none">↺ RESET FLEET</button>
+    <div class="panel-box" id="score-box" style="display:none">
+      <h3>Battle Stats</h3>
+      <div class="score-row"><span>P1 Hits</span>  <span class="score-val"     id="p1-hits">0</span></div>
+      <div class="score-row"><span>P1 Misses</span><span class="score-val red" id="p1-misses">0</span></div>
+      <div class="score-row"><span>P2 Hits</span>  <span class="score-val"     id="p2-hits">0</span></div>
+      <div class="score-row"><span>P2 Misses</span><span class="score-val red" id="p2-misses">0</span></div>
+    </div>
+    <button class="action-btn danger" id="forfeit-btn" onclick="forfeit()" style="display:none">⚑ FORFEIT</button>
+  </div>
+
+  <!-- Create the grid for player 2 -->
+  <div class="board-section" id="p2-section">
+    <div class="board-label" id="p2-label">PLAYER 2 WATERS</div>
+    <div class="grid-wrapper">
+      <div class="axis-labels">
+        <div class="corner"></div>
+        <div class="col-labels" id="p2-col-labels"></div>
+      </div>
+      <div style="display:flex">
+        <div class="row-labels" id="p2-row-labels"></div>
+        <div class="grid" id="p2-grid"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Create a screen so that players can pass the computer after completing their turn -->
+<div id="pass-screen">
+  <h2 id="pass-title">PASS THE DEVICE</h2>
+  <p id="pass-desc">Player 2, please take the device.</p>
+  <button id="pass-confirm-btn" onclick="confirmPass()">READY →</button>
+</div>
+
+<!-- Create the screen for when one of the players win with stats showing -->
+<div id="win-screen">
+  <div id="win-title">VICTORY!</div>
+  <div class="win-stars">⭐ ⭐ ⭐</div>
+  <div class="win-stats">
+    <div>
+      <div class="win-stat-label">WINNER</div>
+      <div class="win-stat-val" id="win-name" style="color:var(--gold)">PLAYER 1</div>
+    </div>
+    <div>
+      <div class="win-stat-label">TOTAL SHOTS</div>
+      <div class="win-stat-val" id="win-shots">0</div>
+    </div>
+    <div>
+      <div class="win-stat-label">HIT RATE</div>
+      <div class="win-stat-val" id="win-rate">0%</div>
+    </div>
+    <div>
+      <div class="win-stat-label">SHIPS SUNK</div>
+      <div class="win-stat-val" id="win-sunk">0/5</div>
+    </div>
+  </div>
+  <button class="action-btn primary" id="play-again-btn" onclick="initGame()"
+    style="padding:14px 40px;font-size:0.9rem;letter-spacing:0.2em;">⟳ PLAY AGAIN</button>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
